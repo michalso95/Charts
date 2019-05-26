@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Charts
 {
@@ -20,7 +21,7 @@ namespace Charts
             {
                 lista = new List<Row>();
                 List<string> temp;
-                temp = File.ReadAllLines(@zmienna1).Skip(1).ToList();
+                temp = File.ReadAllLines(zmienna1).Skip(1).ToList();
                 foreach (var x in temp)
                 {
                     Row temprow = FromCsv(x);
@@ -56,6 +57,7 @@ namespace Charts
             }
             catch (IndexOutOfRangeException)
             {
+                MessageBox.Show("2");
                 return null;
             }
         }

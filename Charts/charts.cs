@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZedGraph;
 using CsvHelper;
+using System.IO;
 
 namespace Charts
 {
@@ -16,17 +17,26 @@ namespace Charts
     {
         Reader read;
         public Double time, temp, humidity, uv, methane, wind, damp;
-        List<Double> list_time = new List<double>();
-        List<Double> list_temp = new List<double>();
-        List<Double> list_humi = new List<double>();
-        List<Double> list_meth = new List<double>();
-        List<Double> list_damp = new List<double>();
-        List<Double> list_wind = new List<double>();
-        List<Double> list_uv = new List<double>();
+        PointPairList list_temp = new PointPairList();
+        PointPairList list_humi = new PointPairList();
+        PointPairList list_meth = new PointPairList();
+        PointPairList list_damp = new PointPairList();
+        PointPairList list_wind = new PointPairList();
+        PointPairList list_uv = new PointPairList();
+        //List<Double> list_time = new List<double>();
+        //List<Double> list_temp = new List<double>();
+        //List<Double> list_humi = new List<double>();
+        //List<Double> list_meth = new List<double>();
+        //List<Double> list_damp = new List<double>();
+        //List<Double> list_wind = new List<double>();
+        //List<Double> list_uv = new List<double>();
+        ZedGraphControl graph_temp = new ZedGraphControl();
+
+        string path;
 
         public charts()
         {
-            InitializeComponent();
+            InitializeComponent();     
         }
 
         private void reading_csv(string path)
@@ -44,13 +54,13 @@ namespace Charts
                     methane = Convert.ToDouble(x.methane);
                     wind = Convert.ToDouble(x.wind);
 
-                    list_time.Add(time);
-                    list_temp.Add(temp);
-                    list_humi.Add(humidity);
-                    list_uv.Add(uv);
-                    list_damp.Add(damp);
-                    list_meth.Add(methane);
-                    list_wind.Add(wind);
+                    //list_time.Add(time);
+                    list_temp.Add(time, temp);
+                    list_humi.Add(time, humidity);
+                    list_uv.Add(time, uv);
+                    list_damp.Add(time, damp);
+                    list_meth.Add(time, methane);
+                    list_wind.Add(time, wind);
                 }
             }
             catch (Exception eq)
@@ -59,20 +69,40 @@ namespace Charts
             }
         }
 
+        private void plotgraph()
+        {
+            GraphPane plot_temp = graph_temp.GraphPane;
+            plot_temp.Title.Text = "Temperature";
+            plot_temp.XAxis.Title.Text = "TIME";
+            plot_temp.YAxis.Title.Text = "TEMPERATURE";
+
+            LineItem line_temp = plot_temp.AddCurve("temperature", list_temp, Color.Red, SymbolType.Circle);
+            graph_temp.AxisChange();
+        }
+
+        private void setsize()
+        {
+            graph_temp.Location = new Point(10, 10);
+            graph_temp.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 20);
+        }
+
         private void make_btn_Click(object sender, EventArgs e)
         {
-            if (check_temp.Checked == false && check_humidity.Checked == false && check_uv.Checked == false && check_damp.Checked == false && check_methane.Checked == false && check_wind.Checked == false)
+            if ((check_temp.Checked == false) && (check_humidity.Checked == false) && (check_uv.Checked == false) && (check_damp.Checked == false) && (check_methane.Checked == false) && (check_wind.Checked == false))
             {
                 MessageBox.Show("No checked charts");
             }
             else
             {
                 OpenFileDialog dlg = new OpenFileDialog();
-                string path;
-                dlg.Filter = "CSV Files(*.csv)|*.csv|All files(*.*)|*.*";
-                path = dlg.FileName.ToString();
-                reading_csv(path);
-
+                dlg.Filter = "CSV Files(*.csv)|*.csv|All files(*.*)|*.*";          
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    path = dlg.InitialDirectory.ToString() + dlg.FileName.ToString();
+                    reading_csv(path);
+                    setsize();
+                    plotgraph();
+                }
 
             }
         }
