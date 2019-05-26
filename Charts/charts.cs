@@ -31,6 +31,11 @@ namespace Charts
         //List<Double> list_wind = new List<double>();
         //List<Double> list_uv = new List<double>();
         ZedGraphControl graph_temp = new ZedGraphControl();
+        ZedGraphControl graph_humi = new ZedGraphControl();
+        ZedGraphControl graph_meth = new ZedGraphControl();
+        ZedGraphControl graph_damp = new ZedGraphControl();
+        ZedGraphControl graph_wind = new ZedGraphControl();
+        ZedGraphControl graph_uv = new ZedGraphControl();
 
         string path;
 
@@ -69,21 +74,106 @@ namespace Charts
             }
         }
 
-        private void plotgraph()
+        private void plot_temp()
         {
             GraphPane plot_temp = graph_temp.GraphPane;
             plot_temp.Title.Text = "Temperature";
             plot_temp.XAxis.Title.Text = "TIME";
             plot_temp.YAxis.Title.Text = "TEMPERATURE";
-
-            LineItem line_temp = plot_temp.AddCurve("temperature", list_temp, Color.Red, SymbolType.Circle);
+            
+            LineItem line_temp = plot_temp.AddCurve("temperature", list_temp, Color.Red, SymbolType.None);
+            line_temp.Color = Color.Green;
+            line_temp.Line.Width = 5;
             graph_temp.AxisChange();
+
+            graph_temp.SaveAs("temperature_chart.png");
+        }
+
+        private void plot_humi()
+        {
+            GraphPane plot_humi = graph_humi.GraphPane;
+            plot_humi.Title.Text = "Humidity";
+            plot_humi.XAxis.Title.Text = "TIME";
+            plot_humi.YAxis.Title.Text = "HUMIDITY";
+
+            LineItem line_temp = plot_humi.AddCurve("humidity", list_humi, Color.Red, SymbolType.Circle);
+            graph_humi.AxisChange();
+
+            graph_humi.SaveAs("humidity_chart.png");
+        }
+
+        private void plot_uv()
+        {
+            GraphPane plot_uv = graph_uv.GraphPane;
+            plot_uv.Title.Text = "UV";
+            plot_uv.XAxis.Title.Text = "TIME";
+            plot_uv.YAxis.Title.Text = "UV";
+
+            LineItem line_uv = plot_uv.AddCurve("UV", list_uv, Color.Red, SymbolType.Circle);
+            graph_uv.AxisChange();
+
+            graph_uv.SaveAs("uv_chart.png");
+        }
+
+        private void plot_damp()
+        {
+            GraphPane plot_damp = graph_damp.GraphPane;
+            plot_damp.Title.Text = "Damp";
+            plot_damp.XAxis.Title.Text = "TIME";
+            plot_damp.YAxis.Title.Text = "DAMP";
+
+            LineItem line_damp = plot_damp.AddCurve("damp", list_damp, Color.Red, SymbolType.Circle);
+            graph_damp.AxisChange();
+
+            graph_damp.SaveAs("damp.png");
+        }
+
+        private void plot_meth()
+        {
+            GraphPane plot_meth = graph_meth.GraphPane;
+            plot_meth.Title.Text = "METHANE";
+            plot_meth.XAxis.Title.Text = "TIME";
+            plot_meth.YAxis.Title.Text = "METHANE";
+
+            LineItem line_meth = plot_meth.AddCurve("methane", list_meth, Color.Red, SymbolType.Circle);
+            graph_meth.AxisChange();
+
+            graph_meth.SaveAs("methane_chart.png");
+        }
+
+        private void plot_wind()
+        {
+            GraphPane plot_wind = graph_wind.GraphPane;
+            plot_wind.Title.Text = "Wind";
+            plot_wind.XAxis.Title.Text = "TIME";
+            plot_wind.YAxis.Title.Text = "WIND";
+
+            LineItem line_wind = plot_wind.AddCurve("wind", list_wind, Color.Red, SymbolType.Circle);
+            graph_wind.AxisChange();
+
+            graph_wind.SaveAs("wind_chart.png");
         }
 
         private void setsize()
         {
             graph_temp.Location = new Point(10, 10);
-            graph_temp.Size = new Size(this.ClientRectangle.Width - 20, this.ClientRectangle.Height - 20);
+            graph_temp.Size = new Size(1000, 1000);
+
+            graph_humi.Location = new Point(10, 10);
+            graph_humi.Size = new Size(1000, 1000);
+
+            graph_damp.Location = new Point(10, 10);
+            graph_damp.Size = new Size(1000, 1000);
+
+            graph_uv.Location = new Point(10, 10);
+            graph_uv.Size = new Size(1000, 1000);
+
+            graph_meth.Location = new Point(10, 10);
+            graph_meth.Size = new Size(1000, 1000);
+
+            graph_wind.Location = new Point(10, 10);
+            graph_wind.Size = new Size(1000, 1000);
+
         }
 
         private void make_btn_Click(object sender, EventArgs e)
@@ -101,9 +191,14 @@ namespace Charts
                     path = dlg.InitialDirectory.ToString() + dlg.FileName.ToString();
                     reading_csv(path);
                     setsize();
-                    plotgraph();
-                }
+                    if (check_temp.Checked == true) { plot_temp(); }
+                    if (check_humidity.Checked == true) { plot_humi(); }
+                    if (check_wind.Checked == true) { plot_wind(); }
+                    if (check_uv.Checked == true) { plot_uv(); }
+                    if (check_methane.Checked == true) { plot_meth(); }
+                    if (check_damp.Checked == true) { plot_damp(); }
 
+                }
             }
         }
     }
