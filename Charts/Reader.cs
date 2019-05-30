@@ -48,11 +48,11 @@ namespace Charts
             {
                 row.time = values[0];
                 row.temperature = values[1];
-                row.humidity = values[2];
+                row.pressure = values[2];
                 row.ultraviolet = values[3];
-                row.damp = values[4];
+                row.wind = values[4];
                 row.methane = values[5];
-                row.wind = values[6];
+                row.damp = values[6];
                 return row;
             }
             catch (IndexOutOfRangeException)

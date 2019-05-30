@@ -10,11 +10,11 @@ namespace Charts
     {
         public string time;
         public string temperature;
-        public string humidity;
+        public string pressure;
         public string ultraviolet;
-        public string damp;
-        public string methane;
         public string wind;
+        public string methane;
+        public string damp;
     }
 
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.check_temp = new System.Windows.Forms.CheckBox();
-            this.check_humidity = new System.Windows.Forms.CheckBox();
+            this.check_press = new System.Windows.Forms.CheckBox();
             this.check_uv = new System.Windows.Forms.CheckBox();
             this.check_damp = new System.Windows.Forms.CheckBox();
             this.check_methane = new System.Windows.Forms.CheckBox();
@@ -49,17 +49,17 @@
             this.check_temp.Text = "Temperature";
             this.check_temp.UseVisualStyleBackColor = true;
             // 
-            // check_humidity
+            // check_press
             // 
-            this.check_humidity.AutoSize = true;
-            this.check_humidity.Checked = true;
-            this.check_humidity.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.check_humidity.Location = new System.Drawing.Point(13, 37);
-            this.check_humidity.Name = "check_humidity";
-            this.check_humidity.Size = new System.Drawing.Size(66, 17);
-            this.check_humidity.TabIndex = 1;
-            this.check_humidity.Text = "Humidity";
-            this.check_humidity.UseVisualStyleBackColor = true;
+            this.check_press.AutoSize = true;
+            this.check_press.Checked = true;
+            this.check_press.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.check_press.Location = new System.Drawing.Point(13, 37);
+            this.check_press.Name = "check_press";
+            this.check_press.Size = new System.Drawing.Size(67, 17);
+            this.check_press.TabIndex = 1;
+            this.check_press.Text = "Pressure";
+            this.check_press.UseVisualStyleBackColor = true;
             // 
             // check_uv
             // 
@@ -80,9 +80,9 @@
             this.check_damp.CheckState = System.Windows.Forms.CheckState.Checked;
             this.check_damp.Location = new System.Drawing.Point(13, 85);
             this.check_damp.Name = "check_damp";
-            this.check_damp.Size = new System.Drawing.Size(54, 17);
+            this.check_damp.Size = new System.Drawing.Size(41, 17);
             this.check_damp.TabIndex = 3;
-            this.check_damp.Text = "Damp";
+            this.check_damp.Text = "CO";
             this.check_damp.UseVisualStyleBackColor = true;
             // 
             // check_methane
@@ -123,13 +123,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(305, 162);
+            this.ClientSize = new System.Drawing.Size(325, 192);
             this.Controls.Add(this.make_btn);
             this.Controls.Add(this.check_wind);
             this.Controls.Add(this.check_methane);
             this.Controls.Add(this.check_damp);
             this.Controls.Add(this.check_uv);
-            this.Controls.Add(this.check_humidity);
+            this.Controls.Add(this.check_press);
             this.Controls.Add(this.check_temp);
             this.Name = "charts";
             this.Text = "Make charts";
@@ -141,7 +141,7 @@
         #endregion
 
         private System.Windows.Forms.CheckBox check_temp;
-        private System.Windows.Forms.CheckBox check_humidity;
+        private System.Windows.Forms.CheckBox check_press;
         private System.Windows.Forms.CheckBox check_uv;
         private System.Windows.Forms.CheckBox check_damp;
         private System.Windows.Forms.CheckBox check_methane;
