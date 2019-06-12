@@ -17,20 +17,12 @@ namespace Charts
     {
         Reader read;
         public Double time, temp, pressure, uv, methane, wind, damp;
-        //public string time;
         PointPairList list_temp = new PointPairList();
         PointPairList list_press = new PointPairList();
         PointPairList list_meth = new PointPairList();
         PointPairList list_damp = new PointPairList();
         PointPairList list_wind = new PointPairList();
         PointPairList list_uv = new PointPairList();
-        //List<Double> list_time = new List<double>();
-        //List<Double> list_temp = new List<double>();
-        //List<Double> list_humi = new List<double>();
-        //List<Double> list_meth = new List<double>();
-        //List<Double> list_damp = new List<double>();
-        //List<Double> list_wind = new List<double>();
-        //List<Double> list_uv = new List<double>();
         ZedGraphControl graph_temp = new ZedGraphControl();
         ZedGraphControl graph_press = new ZedGraphControl();
         ZedGraphControl graph_meth = new ZedGraphControl();
@@ -57,7 +49,6 @@ namespace Charts
                     minute = (int)Convert.ToDouble(x.time.Substring(2, 2));
                     sec = (int)Convert.ToDouble(x.time.Substring(5, 2));
                     
-               //     time = Convert.ToDouble(x.time);
                     temp = Convert.ToDouble(x.temperature)/1000;
                     pressure = Convert.ToDouble(x.pressure)/1000;
                     uv = Convert.ToDouble(x.ultraviolet)/1000;
@@ -65,7 +56,6 @@ namespace Charts
                     methane = Convert.ToDouble(x.methane)/1000;
                     wind = Convert.ToDouble(x.wind)/1000/3.6;
 
-                    //list_time.Add(time);
                     list_temp.Add(new XDate(2019, 05, 29, hour, minute, sec), temp);
                     list_press.Add(new XDate(2019, 05, 29, hour, minute, sec), pressure);
                     list_uv.Add(new XDate(2019, 05, 29, hour, minute, sec), uv);
